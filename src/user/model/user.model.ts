@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from 'class-validator';
 
-export class UserDto {
+export class UserModel {
   @IsNumber()
   id: number;
 
