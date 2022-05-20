@@ -1,15 +1,17 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString, IsNotEmpty } from 'class-validator';
 
 export class AuthModel {
-  @IsNumber()
   id: number;
 
   @IsString()
+  @IsNotEmpty()
   username: string;
 
   @IsString()
+  @IsNotEmpty()
   password: string;
 
   @IsNumber()
+  @IsNotEmpty()
   userId: number;
 }
