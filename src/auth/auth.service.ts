@@ -15,7 +15,7 @@ export class AuthService {
     return this.authRepository.save(authModel);
   }
 
-  loginAuth(authModel: AuthModel): Promise<AuthModel> {
-    return this.authRepository.save(authModel);
+  loginAuth(body: any): Promise<AuthModel> {
+    return this.authRepository.findOne({ username: body.username });
   }
 }
