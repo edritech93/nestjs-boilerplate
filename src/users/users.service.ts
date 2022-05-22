@@ -25,7 +25,7 @@ export class UsersService {
   }
 
   findOneByEmail(email: string): Promise<CreateUserDto> {
-    return this.usersRepository.findOne({email: email});
+    return this.usersRepository.findOne({ email: email });
   }
 
   update(id: number, updateUserDto: UpdateUserDto): Promise<UpdateResult> {
