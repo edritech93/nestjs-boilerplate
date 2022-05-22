@@ -12,6 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { getPasswordHash, isMatchPassword } from 'src/helper/hashing';
 import { MessageModel } from 'src/helper/message.model';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -54,7 +55,7 @@ export class UsersController {
   }
 
   @Post('login')
-  async login(@Body() body: any): Promise<MessageModel> {
+  async login(@Body() body: LoginUserDto): Promise<MessageModel> {
     const authModel: CreateUserDto = await this.usersService.findOneByEmail(
       body.email,
     );
