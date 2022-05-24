@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   UseGuards,
+  Request,
+  BadRequestException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,6 +18,7 @@ import { MessageModel } from 'src/helper/message.model';
 import { LoginUserDto } from './dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtAuthGuard } from 'src/helper/jwt-auth.guard';
+import { jwtConstants } from 'src/helper/constants';
 
 @Controller('users')
 export class UsersController {
@@ -69,15 +72,34 @@ export class UsersController {
     if (authModel) {
       const isMatch = await isMatchPassword(body.password, authModel.password);
       if (isMatch) {
-        const payload = { username: authModel.email, typeid: authModel.id };
+        const payload = { sub: authModel.id, username: authModel.email };
         return {
-          accessToken: this.jwtTokenService.sign(payload),
+          accessToken: this.jwtTokenService.sign(payload, {
+            expiresIn: jwtConstants.expiredToken,
+          }),
+          refreshToken: this.jwtTokenService.sign(payload, {
+            expiresIn: jwtConstants.expiredRefreshToken,
+          }),
         };
       } else {
-        return { message: 'Password Salah' };
+        throw new BadRequestException({ message: 'Password Salah' });
       }
     } else {
-      return { message: 'User Tidak Ditemukan' };
+      throw new BadRequestException({ message: 'User Tidak Ditemukan' });
     }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('refresh')
+  async refresh(@Request() req: any): Promise<any> {
+    const payload = { sub: req.user.id, username: req.user.email };
+    return {
+      accessToken: this.jwtTokenService.sign(payload, {
+        expiresIn: jwtConstants.expiredToken,
+      }),
+      refreshToken: this.jwtTokenService.sign(payload, {
+        expiresIn: jwtConstants.expiredRefreshToken,
+      }),
+    };
   }
 }

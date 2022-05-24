@@ -11,7 +11,6 @@ import { jwtConstants } from 'src/helper/constants';
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
     }),
   ],
   controllers: [UsersController],
