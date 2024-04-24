@@ -5,10 +5,10 @@ export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, length: 20 })
   fullName: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, length: 25 })
   email: string;
 
   @Column({ nullable: false })
@@ -19,6 +19,7 @@ export class Users {
     default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: string;
+
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',
