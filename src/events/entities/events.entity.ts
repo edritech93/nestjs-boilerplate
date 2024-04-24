@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Users } from 'src/users/entity/users.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 
 @Entity('events')
 export class Events {
@@ -22,4 +29,11 @@ export class Events {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updatedAt: string;
+
+  @ManyToOne(() => Users, (user) => user.event)
+  @JoinColumn()
+  user: Users;
+
+  @Column()
+  userId: number;
 }

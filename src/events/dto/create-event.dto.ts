@@ -10,4 +10,6 @@ export class CreateEventDto {
   @IsString()
   @IsNotEmpty()
   eventDescription: string;
+
+  userId: number;
 }

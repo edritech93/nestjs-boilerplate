@@ -66,13 +66,13 @@ export class UsersController {
 
   @Post('login')
   async login(@Body() body: LoginUserDto): Promise<any> {
-    const authModel: CreateUserDto = await this.usersService.findOneByEmail(
+    const user: CreateUserDto = await this.usersService.findOneByEmail(
       body.email,
     );
-    if (authModel) {
-      const isMatch = await isMatchPassword(body.password, authModel.password);
+    if (user) {
+      const isMatch = await isMatchPassword(body.password, user.password);
       if (isMatch) {
-        const payload = { sub: authModel.id, username: authModel.email };
+        const payload = { sub: user.id, username: user.email };
         return {
           accessToken: this.jwtTokenService.sign(payload, {
             expiresIn: jwtConstants.expiredToken,

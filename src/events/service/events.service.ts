@@ -11,11 +11,22 @@ export class EventsService {
     private eventsRepository: Repository<Events>,
   ) {}
 
-  findAll(): Promise<CreateEventDto[]> {
-    return this.eventsRepository.find();
+  findAll(): Promise<Events[]> {
+    return this.eventsRepository.find({
+      relations: {
+        user: true,
+      },
+    });
   }
 
-  create(createEventDto: CreateEventDto): Promise<CreateEventDto> {
+  find(eventId: number): Promise<Events> {
+    return this.eventsRepository.findOne({
+      where: { id: eventId },
+      relations: { user: true },
+    });
+  }
+
+  create(createEventDto: CreateEventDto): Promise<Events> {
     return this.eventsRepository.save(createEventDto);
   }
 }
