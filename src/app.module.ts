@@ -1,3 +1,4 @@
+import { EventsModule } from './events/events.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -18,6 +19,7 @@ import { UsersModule } from './users/users.module';
       synchronize: process.env.NODE_ENV !== 'production' ? true : false,
     }),
     UsersModule,
+    EventsModule,
   ],
   providers: [JwtStrategy],
 })
