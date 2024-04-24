@@ -13,12 +13,12 @@ import {
 import { UsersService } from '../service/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
-import { getPasswordHash, isMatchPassword } from 'src/helper/hashing';
-import { MessageModel } from 'src/helper/message.model';
+import { getPasswordHash, isMatchPassword } from 'src/libs/hashing';
+import { MessageModel } from 'src/libs/message.model';
 import { LoginUserDto } from '../dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
-import { JwtAuthGuard } from 'src/helper/jwt-auth.guard';
-import { jwtConstants } from 'src/helper/constants';
+import { JwtAuthGuard } from 'src/libs/jwt-auth.guard';
+import { jwtConstants } from 'src/libs/constants';
 
 @Controller('users')
 export class UsersController {

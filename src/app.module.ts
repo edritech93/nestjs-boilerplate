@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtStrategy } from './helper/jwt.strategy';
+import { JwtStrategy } from './libs/jwt.strategy';
 import { UsersModule } from './users/users.module';
 
 @Module({
