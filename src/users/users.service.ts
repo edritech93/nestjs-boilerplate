@@ -21,11 +21,11 @@ export class UsersService {
   }
 
   findOne(id: number): Promise<CreateUserDto> {
-    return this.usersRepository.findOne(+id);
+    return this.usersRepository.findOneBy({ id });
   }
 
   findOneByEmail(email: string): Promise<CreateUserDto> {
-    return this.usersRepository.findOne({ email: email });
+    return this.usersRepository.findOneBy({ email: email });
   }
 
   update(id: number, updateUserDto: UpdateUserDto): Promise<UpdateResult> {
