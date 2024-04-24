@@ -10,15 +10,15 @@ import {
   Request,
   BadRequestException,
 } from '@nestjs/common';
+import { getPasswordHash, isMatchPassword } from 'src/libs/hashing';
 import { UsersService } from '../service/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
-import { getPasswordHash, isMatchPassword } from 'src/libs/hashing';
+import { JwtAuthGuard } from 'src/libs/jwt-auth.guard';
 import { MessageModel } from 'src/libs/message.model';
 import { LoginUserDto } from '../dto/login-user.dto';
-import { JwtService } from '@nestjs/jwt';
-import { JwtAuthGuard } from 'src/libs/jwt-auth.guard';
 import { jwtConstants } from 'src/libs/constants';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('users')
 export class UsersController {

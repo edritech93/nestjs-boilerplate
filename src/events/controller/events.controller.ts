@@ -1,8 +1,21 @@
-/*
-https://docs.nestjs.com/controllers#controllers
-*/
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { EventsService } from '../service/events.service';
+import { JwtAuthGuard } from 'src/libs/jwt-auth.guard';
+import { CreateEventDto } from '../dto/create-event.dto';
 
-import { Controller } from '@nestjs/common';
+@Controller('events')
+export class EventsController {
+  constructor(private readonly eventService: EventsService) {}
 
-@Controller()
-export class EventsController {}
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  findAll() {
+    return this.eventService.findAll();
+  }
+
+  @Post()
+  @UseGuards(JwtAuthGuard)
+  create(@Body() createEventDto: CreateEventDto): Promise<CreateEventDto> {
+    return this.eventService.create(createEventDto);
+  }
+}
