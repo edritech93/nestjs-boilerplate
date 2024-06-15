@@ -3,7 +3,8 @@
 This repo is using Nest JS version 10
 
 ## Collection
-import file ```Nest Boilerplate.postman_collection.json``` to Postman
+
+import file `Nest-Boilerplate.postman_collection.json` to Postman
 
 ## Installation
 
@@ -36,4 +37,3 @@ $ yarn run test:e2e
 # test coverage
 $ yarn run test:cov
 ```
-
