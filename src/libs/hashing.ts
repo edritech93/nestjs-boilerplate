@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 
 const saltOrRounds = 10;
 
-export async function getPasswordHash(password: string): Promise<string> {
+export async function getPasswordHash(password: string = ''): Promise<string> {
   const hash = await bcrypt.hash(password, saltOrRounds);
   return hash;
 }

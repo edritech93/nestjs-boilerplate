@@ -1,13 +1,17 @@
-import { EventsModule } from './events/events.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtStrategy } from './libs/jwt.strategy';
-import { UsersModule } from './users/users.module';
+import { IsUnique } from './libs/is-unique';
+import { UserAuthModule } from './user-auth/user-auth.module';
+import { AttachmentModule } from './attachment/attachment.module';
+import { DeviceTokenModule } from './device-token/device-token.module';
+import { MailerModule } from './mailer/mailer.module';
+import { OtpModule } from './otp/otp.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -18,9 +22,13 @@ import { UsersModule } from './users/users.module';
       entities: [process.env.ENTITY_PATH],
       synchronize: process.env.NODE_ENV !== 'production' ? true : false,
     }),
-    UsersModule,
-    EventsModule,
+    UserAuthModule,
+    AttachmentModule,
+    DeviceTokenModule,
+    MailerModule,
+    OtpModule,
+    ProfileModule,
   ],
-  providers: [JwtStrategy],
+  providers: [IsUnique],
 })
 export class AppModule {}
