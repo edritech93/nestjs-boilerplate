@@ -1,6 +1,6 @@
 export type PaginationModel = {
-  page?: number;
-  limit?: number;
+  page: number;
+  limit: number;
   search?: string;
   startDate?: string;
   endDate?: string;

@@ -32,10 +32,13 @@ export class DeviceToken {
   })
   updatedAt: string;
 
-  @ManyToOne(() => UserAuth, (e) => e.deviceToken, { onUpdate: 'CASCADE' })
+  @ManyToOne(() => UserAuth, (e) => e.deviceToken, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   user: UserAuth;
 
-  @Column()
+  @Column({ nullable: false })
   userId: number;
 }

@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
-import { getEmailFooterAttachment } from 'src/otp/template/attachment.email';
+import { getAttachmentMail } from 'src/otp/template/attachment.email';
 
 @Injectable()
 export class MailerService {
@@ -42,9 +42,9 @@ export class MailerService {
       },
       to,
       subject,
-      text: 'Hello. This email is from Photo Web',
+      text: 'Hello. This email is from Twillink App',
       html,
-      attachments: [...attachments, ...getEmailFooterAttachment()],
+      attachments: [...attachments, ...getAttachmentMail()],
     };
     try {
       const result = await transport.sendMail(options);

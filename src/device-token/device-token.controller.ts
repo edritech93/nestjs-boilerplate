@@ -12,7 +12,7 @@ import { JwtGuard } from 'src/user-auth/libs/jwt.guard';
 import { GetUser } from 'src/libs/get-user.decorator';
 import { UserAuth } from 'src/user-auth/entities/user-auth.entity';
 
-@Controller('device-token')
+@Controller('v1/device-token')
 @UseGuards(JwtGuard)
 export class DeviceTokenController {
   constructor(private readonly deviceTokenService: DeviceTokenService) {}

@@ -32,11 +32,14 @@ export class Profile {
   })
   updatedAt: string;
 
-  @OneToOne(() => UserAuth, (e) => e.profile)
+  @OneToOne(() => UserAuth, (e) => e.profile, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   user: UserAuth;
 
-  @Column()
+  @Column({ nullable: false })
   userId: number;
 
   @OneToOne(() => Attachment, (e) => e.profile, { onUpdate: 'CASCADE' })

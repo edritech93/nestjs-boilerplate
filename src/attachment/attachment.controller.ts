@@ -19,7 +19,7 @@ import { UserAuth } from 'src/user-auth/entities/user-auth.entity';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 
-@Controller('attachment')
+@Controller('v1/attachment')
 @UseGuards(JwtGuard)
 export class AttachmentController {
   constructor(private readonly attachmentService: AttachmentService) {}

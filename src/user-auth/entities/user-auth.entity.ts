@@ -1,6 +1,3 @@
-import { Attachment } from 'src/attachment/entities/attachment.entity';
-import { DeviceToken } from 'src/device-token/entities/device-token.entity';
-import { Profile } from 'src/profile/entities/profile.entity';
 import {
   Column,
   Entity,
@@ -8,6 +5,9 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Attachment } from 'src/attachment/entities/attachment.entity';
+import { DeviceToken } from 'src/device-token/entities/device-token.entity';
+import { Profile } from 'src/profile/entities/profile.entity';
 
 @Entity('userAuth')
 export class UserAuth {
@@ -17,8 +17,8 @@ export class UserAuth {
   @Column({ nullable: false, length: 25 })
   email: string;
 
-  @Column({ nullable: false })
-  password: string;
+  @Column({ nullable: true })
+  password?: string;
 
   @Column({
     type: 'timestamp',

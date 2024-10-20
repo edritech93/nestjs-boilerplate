@@ -1,7 +1,16 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
+import { TypeOrmConfigService } from './libs/type-orm-config-service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { IsUnique } from './libs/is-unique';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 import { UserAuthModule } from './user-auth/user-auth.module';
 import { AttachmentModule } from './attachment/attachment.module';
 import { DeviceTokenModule } from './device-token/device-token.module';
@@ -12,15 +21,11 @@ import { ProfileModule } from './profile/profile.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST,
-      port: 3306,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      entities: [process.env.ENTITY_PATH],
-      synchronize: process.env.NODE_ENV !== 'production' ? true : false,
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfigService,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
     }),
     UserAuthModule,
     AttachmentModule,
@@ -31,4 +36,12 @@ import { ProfileModule } from './profile/profile.module';
   ],
   providers: [IsUnique],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): void {
+    if (process.env.NODE_ENV === 'production') {
+      consumer
+        .apply(LoggerMiddleware)
+        .forRoutes({ path: '*', method: RequestMethod.ALL });
+    }
+  }
+}

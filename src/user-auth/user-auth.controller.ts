@@ -22,7 +22,7 @@ import { JwtGuard } from './libs/jwt.guard';
 import { UpdateUserAuthDto } from './dto/update-user-auth.dto';
 import { ProfileService } from 'src/profile/profile.service';
 
-@Controller('user-auth')
+@Controller('v1/user-auth')
 export class UserAuthController {
   constructor(
     private jwtTokenService: JwtService,

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Profile } from './entities/profile.entity';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
-import { Profile } from './entities/profile.entity';
 
 @Injectable()
 export class ProfileService {
@@ -12,18 +12,19 @@ export class ProfileService {
     private profileRepository: Repository<Profile>,
   ) {}
 
-  create(createProfileDto: CreateProfileDto): Promise<Profile> {
-    return this.profileRepository.save(createProfileDto);
+  create(dto: CreateProfileDto): Promise<Profile> {
+    return this.profileRepository.save(dto);
   }
 
   findOne(id: number): Promise<Profile> {
     return this.profileRepository.findOneBy({ id });
   }
 
-  update(
-    id: number,
-    updateProfileDto: UpdateProfileDto,
-  ): Promise<UpdateResult> {
-    return this.profileRepository.update(+id, updateProfileDto);
+  findOneByUserId(userId: number): Promise<Profile> {
+    return this.profileRepository.findOneBy({ userId });
+  }
+
+  update(id: number, dto: UpdateProfileDto): Promise<UpdateResult> {
+    return this.profileRepository.update(+id, dto);
   }
 }

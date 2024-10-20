@@ -16,7 +16,7 @@ import { ProfileService } from './profile.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { UserAuthService } from 'src/user-auth/user-auth.service';
 
-@Controller('profile')
+@Controller('v1/profile')
 @UseGuards(JwtGuard)
 export class ProfileController {
   constructor(
@@ -61,12 +61,12 @@ export class ProfileController {
 
   @Put()
   async editProfile(
+    @Body() dto: UpdateProfileDto,
     @GetUser() user: UserAuth,
-    @Body() updateProfileDto: UpdateProfileDto,
   ): Promise<MessageModel> {
     try {
-      await this.profileService.update(user.id, updateProfileDto);
-      return { message: 'Update Successfully' };
+      await this.profileService.update(user.id, dto);
+      return { message: 'Profile updated Successfully' };
     } catch (error) {
       throw new BadRequestException(error);
     }

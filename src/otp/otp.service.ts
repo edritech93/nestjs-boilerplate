@@ -11,8 +11,8 @@ export class OtpService {
     private otpRepository: Repository<Otp>,
   ) {}
 
-  create(createOtpDto: CreateOtpDto): Promise<Otp> {
-    return this.otpRepository.save(createOtpDto);
+  create(dto: CreateOtpDto): Promise<Otp> {
+    return this.otpRepository.save(dto);
   }
 
   findAllByEmail(email: string): Promise<Otp[]> {

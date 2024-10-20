@@ -36,7 +36,10 @@ export class Attachment {
   })
   updatedAt: string;
 
-  @ManyToOne(() => UserAuth, (e) => e.attachment, { onUpdate: 'CASCADE' })
+  @ManyToOne(() => UserAuth, (e) => e.attachment, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   user: UserAuth;
 

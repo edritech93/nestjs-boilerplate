@@ -8,5 +8,6 @@ import { DeviceToken } from './entities/device-token.entity';
   imports: [TypeOrmModule.forFeature([DeviceToken])],
   controllers: [DeviceTokenController],
   providers: [DeviceTokenService],
+  exports: [DeviceTokenService],
 })
 export class DeviceTokenModule {}

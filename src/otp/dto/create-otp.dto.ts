@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty } from 'class-validator';
 import { TypeOtpEnum } from '../libs/type-otp.enum';
 
 export class CreateOtpDto {
@@ -8,7 +8,7 @@ export class CreateOtpDto {
   @IsNotEmpty()
   email: string;
 
-  @IsString()
+  @IsEnum(TypeOtpEnum)
   @IsNotEmpty()
   typeOtp: TypeOtpEnum;
 
