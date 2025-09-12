@@ -1,4 +1,10 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  InternalServerErrorException,
+  Post,
+} from '@nestjs/common';
 import { OtpService } from './otp.service';
 import { MessageModel } from 'src/libs/message.model';
 import { CreateOtpDto } from './dto/create-otp.dto';
@@ -78,7 +84,7 @@ export class OtpController {
       await this.mailerService.sendEmail(bodyEmail);
       return { message: 'Already send OTP to your email' };
     } catch (error) {
-      throw new BadRequestException({ message: 'Invalid Email' });
+      throw new InternalServerErrorException(error);
     }
   }
 
@@ -89,7 +95,7 @@ export class OtpController {
     const { email, codeOtp } = validateOtpDto;
     const resOtp = await this.otpService.findOneByEmail(email);
     if (resOtp && resOtp.codeOtp === codeOtp) {
-      if (codeOtp === TypeOtpEnum.signUp) {
+      if (resOtp.typeOtp === TypeOtpEnum.signUp) {
         await this.otpService.remove(resOtp.id);
       }
       return { message: 'OTP valid' };

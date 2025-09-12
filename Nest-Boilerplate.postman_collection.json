@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "2e9f5106-e8ae-42e1-8fcb-321481935fe7",
+		"_postman_id": "50b0426c-e79c-4734-84fc-a74dfc80cdb8",
 		"name": "Nest-Boilerplate",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "6043830"
 	},
 	"item": [
@@ -23,17 +23,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/user-auth/sign-in",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"user-auth",
-								"sign-in"
-							]
-						}
+						"url": "{{base_url}}/api/v1/user-auth/sign-in"
 					},
 					"response": []
 				},
@@ -42,18 +32,7 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/user-auth/sign-in/refresh",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"user-auth",
-								"sign-in",
-								"refresh"
-							]
-						}
+						"url": "{{base_url}}/api/v1/user-auth/sign-in/refresh"
 					},
 					"response": []
 				},
@@ -71,17 +50,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/user-auth/forgot-password",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"user-auth",
-								"forgot-password"
-							]
-						}
+						"url": "{{base_url}}/api/v1/user-auth/forgot-password"
 					},
 					"response": []
 				},
@@ -99,16 +68,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/device-token",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"device-token"
-							]
-						}
+						"url": "{{base_url}}/api/v1/device-token"
 					},
 					"response": []
 				},
@@ -126,16 +86,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/device-token",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"device-token"
-							]
-						}
+						"url": "{{base_url}}/api/v1/device-token"
 					},
 					"response": []
 				}
@@ -158,18 +109,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/user-auth/sign-up/data",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"user-auth",
-								"sign-up",
-								"data"
-							]
-						}
+						"url": "{{base_url}}/api/v1/user-auth/sign-up/data"
 					},
 					"response": []
 				}
@@ -183,17 +123,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/profile/me",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"profile",
-								"me"
-							]
-						}
+						"url": "{{base_url}}/api/v1/profile/me"
 					},
 					"response": []
 				},
@@ -211,16 +141,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/profile",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"profile"
-							]
-						}
+						"url": "{{base_url}}/api/v1/profile"
 					},
 					"response": []
 				},
@@ -230,12 +151,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/profile?search=&page=0&limit=10",
+							"raw": "{{base_url}}/api/v1/profile?search=&page=0&limit=10",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
+								"v1",
 								"profile"
 							],
 							"query": [
@@ -261,18 +183,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/profile/get-by-id/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"profile",
-								"get-by-id",
-								"1"
-							]
-						}
+						"url": "{{base_url}}/api/v1/profile/get-by-id/1"
 					},
 					"response": []
 				}
@@ -295,17 +206,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/otp/validate",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"otp",
-								"validate"
-							]
-						}
+						"url": "{{base_url}}/api/v1/otp/validate"
 					},
 					"response": []
 				},
@@ -323,17 +224,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/otp/send-email",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"otp",
-								"send-email"
-							]
-						}
+						"url": "{{base_url}}/api/v1/otp/send-email"
 					},
 					"response": []
 				}
@@ -347,13 +238,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "{{token}}"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -367,17 +254,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "{{base_url}}/api/attachment/upload",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"attachment",
-								"upload"
-							]
-						}
+						"url": "{{base_url}}/api/v1/attachment/upload"
 					},
 					"response": []
 				},
@@ -386,17 +263,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/attachment/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"attachment",
-								"1"
-							]
-						}
+						"url": "{{base_url}}/api/v1/attachment/1"
 					},
 					"response": []
 				}
@@ -405,13 +272,9 @@
 	],
 	"auth": {
 		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "{{token}}",
-				"type": "string"
-			}
-		]
+		"bearer": {
+			"token": "{{token}}"
+		}
 	},
 	"event": [
 		{
@@ -433,6 +296,16 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
 		}
 	]
 }

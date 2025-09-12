@@ -21,11 +21,11 @@ export class OtpService {
     });
   }
 
-  findOneByEmail(email: string): Promise<Otp> {
+  findOneByEmail(email: string): Promise<Otp | null> {
     return this.otpRepository.findOneBy({ email });
   }
 
-  findOneByOtp(codeOtp: string): Promise<Otp> {
+  findOneByOtp(codeOtp: string): Promise<Otp | null> {
     return this.otpRepository.findOneBy({ codeOtp });
   }
 

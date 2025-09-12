@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Get,
+  InternalServerErrorException,
   Param,
   Put,
   Query,
@@ -25,11 +26,11 @@ export class ProfileController {
   ) {}
 
   @Get('me')
-  getMyProfile(@GetUser() user: UserAuth): Promise<UserAuth> {
+  getMyProfile(@GetUser() user: UserAuth): Promise<UserAuth | null> {
     try {
       return this.userAuthService.findOneById(user.id);
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new InternalServerErrorException(error);
     }
   }
 
@@ -42,20 +43,20 @@ export class ProfileController {
     try {
       return this.userAuthService.findAll({ search, page, limit });
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new InternalServerErrorException(error);
     }
   }
 
   @Get('get-by-id/:id')
-  async getUserById(@Param('id') id: string): Promise<UserAuth> {
+  async getUserById(@Param('id') id: string) {
     try {
       const dataExist = await this.userAuthService.findOneById(+id);
       if (!dataExist) {
-        throw { message: 'User not found' };
+        throw new BadRequestException('User not found');
       }
       return dataExist;
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new InternalServerErrorException(error);
     }
   }
 
@@ -68,7 +69,7 @@ export class ProfileController {
       await this.profileService.update(user.id, dto);
       return { message: 'Profile updated Successfully' };
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new InternalServerErrorException(error);
     }
   }
 }

@@ -20,6 +20,8 @@ async function bootstrap() {
   SwaggerModule.setup('api/v1/docs', app, document);
 
   await app.listen(8080);
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  return console.log(`Application is running on: ${await app.getUrl()}`);
 }
+
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 bootstrap();

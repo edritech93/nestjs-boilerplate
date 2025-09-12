@@ -8,6 +8,7 @@ import {
   Get,
   Param,
   StreamableFile,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'src/libs/get-multer-options';
@@ -31,10 +32,10 @@ export class AttachmentController {
     @GetUser() user: UserAuth,
   ) {
     try {
-      if (!files && files.length === 0) {
-        throw { message: 'File not found' };
+      if (!files) {
+        throw new BadRequestException('File not found');
       }
-      const data = [];
+      const data: CreateAttachmentDto[] = [];
       for (let i = 0; i < files.length; i++) {
         const item = files[i];
         const body: CreateAttachmentDto = {
@@ -43,7 +44,8 @@ export class AttachmentController {
           path: item.path,
           userId: user.id,
         };
-        const temp = await this.attachmentService.create(body);
+        const temp: CreateAttachmentDto =
+          await this.attachmentService.create(body);
         data.push(temp);
       }
       return {
@@ -60,12 +62,12 @@ export class AttachmentController {
     try {
       const dataExist = await this.attachmentService.findOne(+id);
       if (!dataExist) {
-        throw { message: 'Attachment not found' };
+        throw new BadRequestException('Attachment not found');
       }
       const file = createReadStream(join(process.cwd(), dataExist.path));
       return new StreamableFile(file);
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new InternalServerErrorException(error);
     }
   }
 }

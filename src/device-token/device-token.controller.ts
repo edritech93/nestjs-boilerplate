@@ -5,6 +5,7 @@ import {
   Delete,
   UseGuards,
   BadRequestException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { DeviceTokenService } from './device-token.service';
 import { CreateDeviceTokenDto } from './dto/create-device-token.dto';
@@ -27,7 +28,7 @@ export class DeviceTokenController {
       await this.deviceTokenService.create(body);
       return { message: 'Token saved successfully' };
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new InternalServerErrorException(error);
     }
   }
 
@@ -36,12 +37,12 @@ export class DeviceTokenController {
     try {
       const dataExist = await this.deviceTokenService.findOneByToken(dto);
       if (!dataExist) {
-        throw { message: 'Token not found' };
+        throw new BadRequestException('Token not found');
       }
       await this.deviceTokenService.remove(dataExist.id);
       return { message: 'Token deleted successfully' };
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new InternalServerErrorException(error);
     }
   }
 }
