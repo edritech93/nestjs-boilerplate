@@ -37,7 +37,7 @@ export class DeviceTokenController {
     try {
       const dataExist = await this.deviceTokenService.findOneByToken(dto);
       if (!dataExist) {
-        return new BadRequestException({ message: 'Token not found' });
+        throw new BadRequestException('Token not found');
       }
       await this.deviceTokenService.remove(dataExist.id);
       return { message: 'Token deleted successfully' };

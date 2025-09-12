@@ -52,7 +52,7 @@ export class ProfileController {
     try {
       const dataExist = await this.userAuthService.findOneById(+id);
       if (!dataExist) {
-        return new BadRequestException({ message: 'User not found' });
+        throw new BadRequestException('User not found');
       }
       return dataExist;
     } catch (error) {

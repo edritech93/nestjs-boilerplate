@@ -33,7 +33,7 @@ export class AttachmentController {
   ) {
     try {
       if (!files) {
-        return new BadRequestException({ message: 'File not found' });
+        throw new BadRequestException('File not found');
       }
       const data: CreateAttachmentDto[] = [];
       for (let i = 0; i < files.length; i++) {
@@ -62,7 +62,7 @@ export class AttachmentController {
     try {
       const dataExist = await this.attachmentService.findOne(+id);
       if (!dataExist) {
-        return new BadRequestException({ message: 'Attachment not found' });
+        throw new BadRequestException('Attachment not found');
       }
       const file = createReadStream(join(process.cwd(), dataExist.path));
       return new StreamableFile(file);

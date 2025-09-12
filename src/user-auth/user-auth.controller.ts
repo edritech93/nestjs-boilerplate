@@ -67,11 +67,11 @@ export class UserAuthController {
         dto.email,
       );
       if (!user) {
-        return new BadRequestException({ message: 'User not found' });
+        throw new BadRequestException('User not found');
       }
       const isMatch = await isMatchPassword(dto.password, user.password ?? '');
       if (!isMatch) {
-        return new BadRequestException({ message: 'Wrong Password' });
+        throw new BadRequestException('Wrong Password');
       }
       const payload: JwtModel = { id: user.id, email: user.email };
       const authRes = this.userAuthService.getJwtSign(
@@ -83,7 +83,7 @@ export class UserAuthController {
         message: 'Sign In Successfully',
       };
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new BadRequestException(error);
     }
   }
 
@@ -111,13 +111,13 @@ export class UserAuthController {
       const { codeOtp, password } = dto;
       const userOtp: Otp | null = await this.otpService.findOneByOtp(codeOtp);
       if (!userOtp) {
-        return new BadRequestException({ message: 'Otp not found' });
+        throw new BadRequestException('Otp not found');
       }
       const user: UserAuth | null = await this.userAuthService.findOneByEmail(
         userOtp.email,
       );
       if (!user) {
-        return new BadRequestException({ message: 'User not found' });
+        throw new BadRequestException('User not found');
       }
       const passwordHash = await getPasswordHash(password);
       const bodyUser: UpdateUserAuthDto = {
