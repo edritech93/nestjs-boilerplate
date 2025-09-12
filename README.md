@@ -23,7 +23,7 @@
 
 ## Description
 
-This repo is using Nest JS version 10
+This repo is using Nest JS version 11
 
 ## Collection
 
