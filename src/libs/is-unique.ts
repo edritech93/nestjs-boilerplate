@@ -10,7 +10,7 @@ import { EntityManager } from 'typeorm';
 @Injectable()
 export class IsUnique implements ValidatorConstraintInterface {
   constructor(private readonly entityManager: EntityManager) {}
-  async validate(value: any, args?: ValidationArguments): Promise<boolean> {
+  async validate(value: string, args?: ValidationArguments): Promise<boolean> {
     const [tableName, column] = args?.constraints as string[];
 
     const dataExist = await this.entityManager
@@ -24,7 +24,6 @@ export class IsUnique implements ValidatorConstraintInterface {
 
   defaultMessage(validationArguments: ValidationArguments): string {
     const field = validationArguments.property;
-
     return `${field} is already exist.`;
   }
 }

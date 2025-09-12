@@ -13,7 +13,7 @@ import { ProfileService } from 'src/profile/profile.service';
 
 const jwtModule = JwtModule.registerAsync({
   imports: [ConfigModule],
-  useFactory: async (configService: ConfigService) => ({
+  useFactory: (configService: ConfigService) => ({
     secret: configService.get<string>('JWT_KEY'),
   }),
   inject: [ConfigService],

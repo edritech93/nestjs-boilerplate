@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
-import Mail from 'nodemailer/lib/mailer';
+import Mail, { Address } from 'nodemailer/lib/mailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { getAttachmentMail } from 'src/otp/template/attachment.email';
 
@@ -29,17 +29,18 @@ export class MailerService {
   }
 
   async sendEmail(data: Mail.Options) {
-    const { from, to, subject, html, attachments = [] } = data;
+    const defaultFrom: Address = {
+      name: this.configService.get<string>('APP_NAME') ?? '',
+      address: this.configService.get<string>('DEFAULT_MAIL_FROM') ?? '',
+    };
+    const { from = defaultFrom, to, subject, html, attachments = [] } = data;
     const transport = this.mailTransport();
     await transport.verify().catch((error) => {
       console.log('Error Verify Email: ', error);
       throw error;
     });
     const options: Mail.Options = {
-      from: from ?? {
-        name: this.configService.get<string>('APP_NAME'),
-        address: this.configService.get<string>('DEFAULT_MAIL_FROM'),
-      },
+      from,
       to,
       subject,
       text: 'Hello. This email is from Twillink App',

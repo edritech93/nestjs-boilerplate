@@ -4,6 +4,7 @@ import {
   Body,
   UseGuards,
   BadRequestException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { getPasswordHash, isMatchPassword } from 'src/libs/hashing';
 import { MessageModel } from 'src/libs/message.model';
@@ -44,7 +45,7 @@ export class UserAuthController {
         ...dto,
         userId: user.id,
       };
-      this.profileService.create(bodyProfile);
+      await this.profileService.create(bodyProfile);
       const payload: JwtModel = { id: user.id, email: user.email };
       const authRes = this.userAuthService.getJwtSign(
         this.jwtTokenService,
@@ -60,17 +61,17 @@ export class UserAuthController {
   }
 
   @Post('sign-in')
-  async signIn(@Body() dto: SignInDto): Promise<AuthResponseModel> {
+  async signIn(@Body() dto: SignInDto) {
     try {
-      const user: UserAuth = await this.userAuthService.findOneByEmail(
+      const user: UserAuth | null = await this.userAuthService.findOneByEmail(
         dto.email,
       );
       if (!user) {
-        throw { message: 'User not found' };
+        return new BadRequestException({ message: 'User not found' });
       }
-      const isMatch = await isMatchPassword(dto.password, user.password);
+      const isMatch = await isMatchPassword(dto.password, user.password ?? '');
       if (!isMatch) {
-        throw { message: 'Wrong Password' };
+        return new BadRequestException({ message: 'Wrong Password' });
       }
       const payload: JwtModel = { id: user.id, email: user.email };
       const authRes = this.userAuthService.getJwtSign(
@@ -82,13 +83,13 @@ export class UserAuthController {
         message: 'Sign In Successfully',
       };
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new InternalServerErrorException(error);
     }
   }
 
   @Post('sign-in/refresh')
   @UseGuards(JwtGuard)
-  async ReSignIn(@GetUser() user: UserAuth): Promise<AuthResponseModel> {
+  reSignIn(@GetUser() user: UserAuth) {
     try {
       const payload: JwtModel = { id: user.id, email: user.email };
       const authRes = this.userAuthService.getJwtSign(
@@ -100,7 +101,7 @@ export class UserAuthController {
         message: 'Refresh Sign In Successfully',
       };
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new InternalServerErrorException(error);
     }
   }
 
@@ -108,18 +109,21 @@ export class UserAuthController {
   async forgotPassword(@Body() dto: UpdateUserAuthDto): Promise<MessageModel> {
     try {
       const { codeOtp, password } = dto;
-      const userOtp: Otp = await this.otpService.findOneByOtp(codeOtp);
+      const userOtp: Otp | null = await this.otpService.findOneByOtp(codeOtp);
       if (!userOtp) {
-        throw 'Otp not found';
+        return new BadRequestException({ message: 'Otp not found' });
       }
-      const user: UserAuth = await this.userAuthService.findOneByEmail(
+      const user: UserAuth | null = await this.userAuthService.findOneByEmail(
         userOtp.email,
       );
       if (!user) {
-        throw 'User not found';
+        return new BadRequestException({ message: 'User not found' });
       }
       const passwordHash = await getPasswordHash(password);
-      const bodyUser: any = { password: passwordHash };
+      const bodyUser: UpdateUserAuthDto = {
+        password: passwordHash,
+        codeOtp: '',
+      };
       await this.userAuthService.update(+user.id, bodyUser);
       await this.otpService.remove(userOtp.id);
       return { message: 'Update Password Successfully' };

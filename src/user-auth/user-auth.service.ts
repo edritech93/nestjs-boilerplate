@@ -22,11 +22,11 @@ export class UserAuthService {
     return this.authRepository.save(dto);
   }
 
-  findOneByEmail(email: string): Promise<UserAuth> {
+  findOneByEmail(email: string): Promise<UserAuth | null> {
     return this.authRepository.findOneBy({ email: email });
   }
 
-  findOneById(userId: number): Promise<UserAuth> {
+  findOneById(userId: number): Promise<UserAuth | null> {
     return this.authRepository
       .createQueryBuilder('userAuth')
       .where(`userAuth.id = :id`, { id: userId })
@@ -69,7 +69,7 @@ export class UserAuthService {
       refreshToken: service.sign(payload, {
         expiresIn: this.configService.get<number>('JWT_REFRESH_TOKEN_AGE'),
       }),
-      expiresIn: this.configService.get<number>('JWT_TOKEN_AGE'),
+      expiresIn: this.configService.get<number>('JWT_TOKEN_AGE') ?? 0,
     };
   }
 

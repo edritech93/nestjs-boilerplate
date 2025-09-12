@@ -13,7 +13,7 @@ const storage = diskStorage({
       }
       callback(null, folder);
     } else {
-      callback(null, null);
+      callback(null, '');
     }
   },
   filename(req, file: Express.Multer.File, callback) {
@@ -25,7 +25,7 @@ const storage = diskStorage({
       const fileName = `${modifiedFileName}`;
       callback(null, fileName);
     } else {
-      callback(null, null);
+      callback(null, '');
     }
   },
 });

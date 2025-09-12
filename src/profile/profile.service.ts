@@ -16,11 +16,11 @@ export class ProfileService {
     return this.profileRepository.save(dto);
   }
 
-  findOne(id: number): Promise<Profile> {
+  findOne(id: number): Promise<Profile | null> {
     return this.profileRepository.findOneBy({ id });
   }
 
-  findOneByUserId(userId: number): Promise<Profile> {
+  findOneByUserId(userId: number): Promise<Profile | null> {
     return this.profileRepository.findOneBy({ userId });
   }
 
