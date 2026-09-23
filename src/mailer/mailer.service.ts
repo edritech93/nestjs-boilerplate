@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
-import Mail, { Address } from 'nodemailer/lib/mailer';
+import Mail from 'nodemailer/lib/mailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
-import { getAttachmentMail } from 'src/otp/template/attachment.email';
+import { getAttachmentMail } from '../otp/template/attachment.email';
 
 @Injectable()
 export class MailerService {
@@ -29,7 +29,7 @@ export class MailerService {
   }
 
   async sendEmail(data: Mail.Options) {
-    const defaultFrom: Address = {
+    const defaultFrom: nodemailer.Address = {
       name: this.configService.get<string>('APP_NAME') ?? '',
       address: this.configService.get<string>('DEFAULT_MAIL_FROM') ?? '',
     };

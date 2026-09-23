@@ -11,12 +11,12 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { multerOptions } from 'src/libs/get-multer-options';
+import { multerOptions } from '../libs/get-multer-options';
 import { AttachmentService } from './attachment.service';
 import { CreateAttachmentDto } from './dto/create-attachment.dto';
-import { GetUser } from 'src/libs/get-user.decorator';
-import { JwtGuard } from 'src/user-auth/libs/jwt.guard';
-import { UserAuth } from 'src/user-auth/entities/user-auth.entity';
+import { GetUser } from '../libs/get-user.decorator';
+import { JwtGuard } from '../user-auth/libs/jwt.guard';
+import { UserAuth } from '../user-auth/entities/user-auth.entity';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 

@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { TypeDeviceEnum } from '../libs/type-device.enum';
-import { UserAuth } from 'src/user-auth/entities/user-auth.entity';
+import { UserAuth } from '../../user-auth/entities/user-auth.entity';
 
 @Entity('deviceToken')
 export class DeviceToken {

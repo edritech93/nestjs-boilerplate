@@ -1,5 +1,5 @@
-import { Profile } from 'src/profile/entities/profile.entity';
-import { UserAuth } from 'src/user-auth/entities/user-auth.entity';
+import { Profile } from '../../profile/entities/profile.entity';
+import { UserAuth } from '../../user-auth/entities/user-auth.entity';
 import {
   Column,
   Entity,

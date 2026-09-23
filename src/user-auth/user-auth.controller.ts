@@ -6,22 +6,22 @@ import {
   BadRequestException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { getPasswordHash, isMatchPassword } from 'src/libs/hashing';
-import { MessageModel } from 'src/libs/message.model';
+import { getPasswordHash, isMatchPassword } from '../libs/hashing';
+import { MessageModel } from '../libs/message.model';
 import { JwtService } from '@nestjs/jwt';
 import { SignInDto } from './dto/signin.dto';
-import { GetUser } from 'src/libs/get-user.decorator';
-import { CreateProfileDto } from 'src/profile/dto/create-profile.dto';
+import { GetUser } from '../libs/get-user.decorator';
+import { CreateProfileDto } from '../profile/dto/create-profile.dto';
 import { JwtModel } from './dto/jwt.model';
-import { OtpService } from 'src/otp/otp.service';
-import { Otp } from 'src/otp/entities/otp.entity';
+import { OtpService } from '../otp/otp.service';
+import { Otp } from '../otp/entities/otp.entity';
 import { UserAuthService } from './user-auth.service';
 import { CreateUserAuthDto } from './dto/create-user-auth.dto';
 import { AuthResponseModel } from './dto/auth-response.model';
 import { UserAuth } from './entities/user-auth.entity';
 import { JwtGuard } from './libs/jwt.guard';
 import { UpdateUserAuthDto } from './dto/update-user-auth.dto';
-import { ProfileService } from 'src/profile/profile.service';
+import { ProfileService } from '../profile/profile.service';
 
 @Controller('v1/user-auth')
 export class UserAuthController {

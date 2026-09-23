@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { UserAuth } from 'src/user-auth/entities/user-auth.entity';
+import { UserAuth } from '../user-auth/entities/user-auth.entity';
 
 export const GetUser = createParamDecorator(
   (_, ctx: ExecutionContext): UserAuth => {

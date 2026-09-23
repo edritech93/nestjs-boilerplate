@@ -9,9 +9,9 @@ import {
 } from '@nestjs/common';
 import { DeviceTokenService } from './device-token.service';
 import { CreateDeviceTokenDto } from './dto/create-device-token.dto';
-import { JwtGuard } from 'src/user-auth/libs/jwt.guard';
-import { GetUser } from 'src/libs/get-user.decorator';
-import { UserAuth } from 'src/user-auth/entities/user-auth.entity';
+import { JwtGuard } from '../user-auth/libs/jwt.guard';
+import { GetUser } from '../libs/get-user.decorator';
+import { UserAuth } from '../user-auth/entities/user-auth.entity';
 
 @Controller('v1/device-token')
 @UseGuards(JwtGuard)

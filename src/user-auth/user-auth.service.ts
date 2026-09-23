@@ -4,11 +4,11 @@ import { UserAuth } from './entities/user-auth.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { CreateUserAuthDto } from './dto/create-user-auth.dto';
-import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 import { JwtModel } from './dto/jwt.model';
 import { AuthResponseModel } from './dto/auth-response.model';
 import { UpdateUserAuthDto } from './dto/update-user-auth.dto';
-import { PaginationModel } from 'src/libs/pagination.model';
+import { PaginationModel } from '../libs/pagination.model';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserAuthService {

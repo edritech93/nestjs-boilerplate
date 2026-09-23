@@ -1,8 +1,8 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 import { useContainer } from 'class-validator';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,8 +12,8 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
-    .setTitle('Twill APIs')
-    .setDescription('Enjoy Twill APIs Documentation.')
+    .setTitle('Boilerplate APIs')
+    .setDescription('Enjoy Boilerplate APIs Documentation.')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
@@ -22,6 +22,4 @@ async function bootstrap() {
   await app.listen(8080);
   return console.log(`Application is running on: ${await app.getUrl()}`);
 }
-
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-bootstrap();
+void bootstrap();

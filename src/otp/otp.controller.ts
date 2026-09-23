@@ -6,10 +6,10 @@ import {
   Post,
 } from '@nestjs/common';
 import { OtpService } from './otp.service';
-import { MessageModel } from 'src/libs/message.model';
+import { MessageModel } from '../libs/message.model';
 import { CreateOtpDto } from './dto/create-otp.dto';
 import { getRandomOtp } from './libs/get-otp';
-import { MailerService } from 'src/mailer/mailer.service';
+import { MailerService } from '../mailer/mailer.service';
 import { TypeOtpEnum } from './libs/type-otp.enum';
 import { ValidateOtpDto } from './dto/validate-otp.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -62,7 +62,7 @@ export class OtpController {
       textEnd =
         'Thank you for using Twillink, the ultimate consultation app for consultation!';
     }
-    const pathTemplate = `${join(process.cwd())}/src/otp/template/template-1.html`;
+    const pathTemplate = `${join(process.cwd())}/../otp/template/template-1.html`;
     const readHtml = promisify(readFile);
     const html = await readHtml(pathTemplate, 'utf-8');
     const template = handlebars.compile(html);

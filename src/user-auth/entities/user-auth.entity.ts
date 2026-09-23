@@ -5,9 +5,9 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Attachment } from 'src/attachment/entities/attachment.entity';
-import { DeviceToken } from 'src/device-token/entities/device-token.entity';
-import { Profile } from 'src/profile/entities/profile.entity';
+import { Attachment } from '../../attachment/entities/attachment.entity';
+import { DeviceToken } from '../../device-token/entities/device-token.entity';
+import { Profile } from '../../profile/entities/profile.entity';
 
 @Entity('userAuth')
 export class UserAuth {

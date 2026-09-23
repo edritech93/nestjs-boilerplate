@@ -1,5 +1,5 @@
-import { Attachment } from 'src/attachment/entities/attachment.entity';
-import { UserAuth } from 'src/user-auth/entities/user-auth.entity';
+import { Attachment } from '../../attachment/entities/attachment.entity';
+import { UserAuth } from '../../user-auth/entities/user-auth.entity';
 import {
   Column,
   Entity,

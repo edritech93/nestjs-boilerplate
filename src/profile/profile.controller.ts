@@ -9,13 +9,13 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { GetUser } from 'src/libs/get-user.decorator';
-import { MessageModel } from 'src/libs/message.model';
-import { JwtGuard } from 'src/user-auth/libs/jwt.guard';
-import { UserAuth } from 'src/user-auth/entities/user-auth.entity';
+import { GetUser } from '../libs/get-user.decorator';
+import { MessageModel } from '../libs/message.model';
+import { JwtGuard } from '../user-auth/libs/jwt.guard';
+import { UserAuth } from '../user-auth/entities/user-auth.entity';
 import { ProfileService } from './profile.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
-import { UserAuthService } from 'src/user-auth/user-auth.service';
+import { UserAuthService } from '../user-auth/user-auth.service';
 
 @Controller('v1/profile')
 @UseGuards(JwtGuard)

@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MailerService } from 'src/mailer/mailer.service';
-import { Otp } from 'src/otp/entities/otp.entity';
-import { OtpService } from 'src/otp/otp.service';
+import { MailerService } from '../mailer/mailer.service';
+import { Otp } from '../otp/entities/otp.entity';
+import { OtpService } from '../otp/otp.service';
 import { UserAuthService } from './user-auth.service';
 import { UserAuthController } from './user-auth.controller';
 import { UserAuth } from './entities/user-auth.entity';
-import { Profile } from 'src/profile/entities/profile.entity';
-import { ProfileService } from 'src/profile/profile.service';
+import { Profile } from '../profile/entities/profile.entity';
+import { ProfileService } from '../profile/profile.service';
 
 const jwtModule = JwtModule.registerAsync({
   imports: [ConfigModule],

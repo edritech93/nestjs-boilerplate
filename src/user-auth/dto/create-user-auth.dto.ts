@@ -5,7 +5,7 @@ import {
   Validate,
   IsDateString,
 } from 'class-validator';
-import { IsUnique } from 'src/libs/is-unique';
+import { IsUnique } from '../../libs/is-unique';
 
 export class CreateUserAuthDto {
   id: number;

@@ -1,10 +1,10 @@
 import { MulterModuleOptions } from '@nestjs/platform-express';
-import { FileFilterCallback, diskStorage } from 'multer';
+import { diskStorage } from 'multer';
 import { mkdirSync, existsSync } from 'fs';
-import { JwtModel } from 'src/user-auth/dto/jwt.model';
+import { JwtModel } from '../user-auth/dto/jwt.model';
 
 const storage = diskStorage({
-  destination(req, _: Express.Multer.File, callback) {
+  destination(req: any, _: Express.Multer.File, callback) {
     const jwtModel = req.user as JwtModel;
     const folder = `./uploads/${jwtModel.id}`;
     if (folder) {
@@ -33,7 +33,7 @@ const storage = diskStorage({
 const fileFilter = (
   _: Request,
   file: Express.Multer.File,
-  callback: FileFilterCallback,
+  callback: (error: Error | null, acceptFile: boolean) => void,
 ) => {
   const filetypes = /jpeg|jpg|png|HEIC|/;
   const extArray = file.mimetype.split('/');
@@ -53,5 +53,6 @@ export const multerOptions: MulterModuleOptions = {
   limits: {
     fileSize: 5000000,
   },
+  // fileFilter,
   fileFilter,
 };
